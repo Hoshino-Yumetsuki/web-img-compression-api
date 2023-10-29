@@ -4,6 +4,8 @@
 
 <i>Compress image files on your page on vercel with opencv</i>
 
+**This project is an immature project and will be blocked because it is identified as an attack program.**
+
 </div>
 
 ## environment variables
