@@ -5,10 +5,10 @@ import requests
 import io
 import os
 
-env_origin_url = os.getenv('ORIGIN_URL')
-env_jpeg_quality = os.getenv('JPEG_QUALITY')
-env_webp_quality = os.getenv('WEBP_QUALITY')
-env_png_compression = os.getenv('PNG_COMPRESSION')
+env_origin_url = "https://pixiv-img.anjiurine.top/"
+env_jpeg_quality = "80"
+env_webp_quality = "80"
+env_png_compression = "6"
 
 class handler(BaseHTTPRequestHandler):
 
