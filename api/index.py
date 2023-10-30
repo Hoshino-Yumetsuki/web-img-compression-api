@@ -5,14 +5,13 @@ import requests
 import io
 import os
 
-ORIGIN_URL = os.environ.get('ORIGIN_URL')
-JPGE_QUALITY = os.environ.get('JPGE_QUALITY')
-WEBP_QUALITY = os.environ.get('WEBP_QUALITY')
-PNG_COMPRESSION = os.environ.get('PNG_COMPRESSION')
-
 class handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
+        ORIGIN_URL = os.environ.get('ORIGIN_URL')
+        JPGE_QUALITY = os.environ.get('JPGE_QUALITY')
+        WEBP_QUALITY = os.environ.get('WEBP_QUALITY')
+        PNG_COMPRESSION = os.environ.get('PNG_COMPRESSION')
         img_path = self.path[1:]
         origin_url = ORIGIN_URL + img_path
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.69'}
