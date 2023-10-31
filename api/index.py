@@ -10,7 +10,7 @@ class handler(BaseHTTPRequestHandler):
    def do_GET(self):
        img_path = self.path[1:]
        origin_url = os.environ.get("ORIGIN_URL") + img_path
-       headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.69'}
+       headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.69 web-img-compression-api'}
        response = requests.get(origin_url, stream=True, headers=headers)
        try:
            image = cv2.imdecode(np.frombuffer(response.content, np.uint8), 1)
