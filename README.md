@@ -12,4 +12,4 @@
 
 |  | ORIGIN_URL | JPEG_QUALITY | WEBP_QUALITY | PNG_COMPRESSION |
 | --- | --- | --- | --- |--- |
-| eg. | https://example.com/ | 80 | 80 | 6 |
+| eg. | https://example.com/ | 80 | 80 | 3 |

@@ -27,7 +27,7 @@ class handler(BaseHTTPRequestHandler):
                img_type = "image/webp"
            elif ext == ".png":
                env_png_compression = os.environ.get("PNG_COMPRESSION")
-               # 设置png格式图片的压缩质量（数字越大质量越高，最大为9）
+               # 设置png格式图片的压缩质量（数字越大压缩比越大，最大为9）
                encode_param = [int(cv2.IMWRITE_PNG_COMPRESSION), env_png_compression]
                img_type = "image/png"
            else:
