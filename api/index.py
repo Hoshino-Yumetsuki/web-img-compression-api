@@ -43,7 +43,7 @@ class handler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(output.read())
         except Exception as e:
-            self.send_response(500)
-            self.send_header('Content-type', 'text/plain')
+            self.send_response(200)
+            self.send_header('Content-type', response.headers['Content-Type'])
             self.end_headers()
-            self.wfile.write(str(e).encode())
+            self.wfile.write(response.content)
