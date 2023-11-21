@@ -16,7 +16,7 @@ class handler(BaseHTTPRequestHandler):
 
         try:
             response = requests.get(origin_url, stream=True, headers=headers)
-            response.raise_for_status()  # Raise HTTPError for bad responses
+            response.raise_for_status()
             image = cv2.imdecode(np.frombuffer(response.content, np.uint8), 1)
             _, ext = os.path.splitext(img_path)
 
