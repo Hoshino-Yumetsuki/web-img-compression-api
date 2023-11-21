@@ -32,10 +32,10 @@ class handler(BaseHTTPRequestHandler):
             self.wfile.write(output.read())
 
         except requests.exceptions.HTTPError as e:
-            self.send_error(400, explanation="Bad Request: {}".format(str(e)))
+            self.send_error(400, message="Bad Request: {}".format(str(e)))
 
         except Exception as e:
-            self.send_error(500, explanation="Internal Server Error: {}".format(str(e)))
+            self.send_error(500, message="Internal Server Error: {}".format(str(e)))
 
     def get_encode_param_and_type(self, ext):
         if ext in [".jpg", ".jpeg"]:
