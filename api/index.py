@@ -5,6 +5,7 @@ import requests
 import io
 import os
 from urllib.parse import unquote
+import json
 
 class handler(BaseHTTPRequestHandler):
 
@@ -21,6 +22,8 @@ class handler(BaseHTTPRequestHandler):
                 image = cv2.imdecode(np.frombuffer(response.content, np.uint8), 1)
                 _, ext = os.path.splitext(img_url)
 
+                ext = ext.lower()
+
                 encode_param, img_type = self.get_encode_param_and_type(ext)
 
                 output = io.BytesIO()
@@ -33,10 +36,10 @@ class handler(BaseHTTPRequestHandler):
                 self.wfile.write(output.read())
 
             except requests.exceptions.HTTPError as e:
-                self.send_error(400, message="Bad Request: {}".format(str(e)))
+                self.send_error_response(400, "Bad Request", str(e))
 
             except Exception as e:
-                self.send_error(500, message="Internal Server Error: {}".format(str(e)))
+                self.send_error_response(500, "Internal Server Error", str(e))
         else:
             img_path = unquote(self.path[1:])
             env_origin_url = os.environ.get("ORIGIN_URL")
@@ -50,6 +53,8 @@ class handler(BaseHTTPRequestHandler):
                 image = cv2.imdecode(np.frombuffer(response.content, np.uint8), 1)
                 _, ext = os.path.splitext(img_path)
 
+                ext = ext.lower()
+
                 encode_param, img_type = self.get_encode_param_and_type(ext)
 
                 output = io.BytesIO()
@@ -62,10 +67,22 @@ class handler(BaseHTTPRequestHandler):
                 self.wfile.write(output.read())
 
             except requests.exceptions.HTTPError as e:
-                self.send_error(400, message="Bad Request: {}".format(str(e)))
+                self.send_error_response(400, "Bad Request", str(e))
 
             except Exception as e:
-                self.send_error(500, message="Internal Server Error: {}".format(str(e)))
+                self.send_error_response(500, "Internal Server Error", str(e))
+
+    def send_error_response(self, status_code, error_type, message):
+        self.send_response(status_code)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+        error_response = {
+            "error": {
+                "type": error_type,
+                "message": message
+            }
+        }
+        self.wfile.write(json.dumps(error_response).encode('utf-8'))
 
     def get_encode_param_and_type(self, ext):
         if ext in [".jpg", ".jpeg"]:

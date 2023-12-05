@@ -10,6 +10,6 @@
 
 ## environment variables
 
-|  | ORIGIN_URL | JPEG_QUALITY | WEBP_QUALITY | PNG_COMPRESSION | REFERER_URL *Not necessary |
-| --- | --- | --- | --- | --- | --- |
-| eg. | https://example.com/ | 80 | 80 | 3 | https://example.com/ |
+|  | ORIGIN_URL | JPEG_QUALITY | WEBP_QUALITY | PNG_COMPRESSION | REFERER_URL *Not necessary | ACTIVE_MODE *Not necessary|
+| --- | --- | --- | --- | --- | --- | --- |
+| eg. | https://example.com/ | 80 | 80 | 3 | https://example.com/ | True |
