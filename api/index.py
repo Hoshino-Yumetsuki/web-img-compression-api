@@ -4,7 +4,7 @@ import numpy as np
 import requests
 import io
 import os
-from urllib.parse import unquote
+from urllib.parse import unquote, urlsplit
 import json
 
 class handler(BaseHTTPRequestHandler):
@@ -13,7 +13,9 @@ class handler(BaseHTTPRequestHandler):
         active_mode = os.environ.get("ACTIVE_MODE", "").lower() in ["true", "True"]
 
         if active_mode:
-            img_url = unquote(self.path[2:])
+            img_url = unquote(self.path[1:])
+            url_parts = urlsplit(img_url)
+            img_path = url_parts.path
             headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.76'}
 
             try:
