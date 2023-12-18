@@ -13,10 +13,9 @@ class handler(BaseHTTPRequestHandler):
         active_mode = os.environ.get("ACTIVE_MODE", "").lower() in ["true", "True"]
 
         if active_mode:
-            img_url = unquote(urlparse(self.path).query.split('=')[1])
-            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.76'}
-
             try:
+                img_url = unquote(urlparse(self.path).query.split('=')[1])
+                headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.76'}
                 response = requests.get(img_url, stream=True, headers=headers)
                 response.raise_for_status()
                 image = cv2.imdecode(np.frombuffer(response.content, np.uint8), 1)
